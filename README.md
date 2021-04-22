@@ -1,6 +1,6 @@
 # custom-form-fields-react
 
-> this is ibrary helps user to create custom forms
+> This is Library helps user to create custom forms. All you need to do is passing the list of object contains form fileds information to the CustomForm component and it will return the react form.
 
 [![NPM](https://img.shields.io/npm/v/custom-form-fields-react.svg)](https://www.npmjs.com/package/custom-form-fields-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -15,12 +15,48 @@ npm install --save custom-form-fields-react
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'custom-form-fields-react'
+import {CustomForm from} from  'custom-form-fields-react'
 import 'custom-form-fields-react/dist/index.css'
 
 class Example extends Component {
   render() {
-    return <MyComponent />
+    return <CustomForm formLabel={"Label of Your Form"} values={[
+      {label:"Site Name",
+      value:"value",
+      type:"text",
+      placeholder:"Enter Site Name",
+      required:true,
+      key:1
+      },
+      {label:"State",
+      value:"value",
+      type:"text",
+      placeholder:"Enter State",
+      required:false,
+      key:2
+      },
+      {label:"Range",
+      value:50,
+      type:"range",
+      placeholder:"Enter State",
+      required:false,
+      key:3
+      },
+      {label:"Check Me Out",
+      type:"checkbox",
+      value:true,
+      required:false,
+      placeholder:"check box",
+      key:4
+      },
+      {label:"Number",
+      type:"number",
+      value:1234,
+      required:false,
+      placeholder:"Enter number",
+      key:5
+      }
+    ]}/>
   }
 }
 ```
