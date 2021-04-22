@@ -61,6 +61,10 @@ class Example extends Component {
 }
 ```
 
+## Code of Conduct
+
+Please read the [Code of Conduct](https://github.com/sinancengiz/custom-form-fields-react/blob/master/CODE_OF_CONDUCT.md)
+
 ## License
 
 MIT © [sinancengiz](https://github.com/sinancengiz) Copyright © 2021,
