@@ -63,4 +63,8 @@ class Example extends Component {
 
 ## License
 
-MIT © [sinancengiz](https://github.com/sinancengiz)
+MIT © [sinancengiz](https://github.com/sinancengiz) Copyright © 2021,
+
+## Author
+
+Sinan Cengiz
