@@ -1,6 +1,6 @@
 # custom-form-fields-react
 
-> This is Library helps user to create custom forms. All you need to do is passing the list of object contains form fileds information to the CustomForm component and it will return the react form.
+> This is a library helps user to create custom forms. All you need to do is passing the list of objects contain form fileds information to the CustomForm component and it will return a React Form.
 
 [![NPM](https://img.shields.io/npm/v/custom-form-fields-react.svg)](https://www.npmjs.com/package/custom-form-fields-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
