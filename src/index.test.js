@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import { CustomForm } from '.'
 
-describe('ExampleComponent', () => {
+describe('CustomFormComponent', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(CustomForm).toBeTruthy()
   })
 })
