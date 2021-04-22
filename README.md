@@ -15,7 +15,7 @@ npm install --save custom-form-fields-react
 ```jsx
 import React, { Component } from 'react'
 
-import {CustomForm from} from  'custom-form-fields-react'
+import {CustomForm} from  'custom-form-fields-react'
 import 'custom-form-fields-react/dist/index.css'
 
 class Example extends Component {
