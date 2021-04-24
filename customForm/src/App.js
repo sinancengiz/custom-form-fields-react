@@ -1,10 +1,107 @@
-import React from 'react'
+import React, { useState }  from 'react'
+import { Container, Form, Button,Col,Row} from 'react-bootstrap';
 import { CustomForm } from 'custom-form-fields-react'
 import 'custom-form-fields-react/dist/index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
-  return <CustomForm values= {values} modelFormItems={modelFormItems} />
+  const [state, setState] = useState({
+    firstName: "Sinan",
+    lastName: "Cengiz",
+    email: "sinan@gmail.com",
+    password: "password",
+    customValues:values
+  })
+
+  function handleChange(evt) {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value
+    });
+  }
+
+  function helperHandleCustomFieldChange(customValues){
+    setState({
+      ...state,
+      customValues: customValues
+    })
+  }
+
+  function onSubmit(event){
+    event.preventDefault()
+    console.log(state)
+  };
+
+  return (
+    <Container>
+      <Row>
+        <h1>This is a Form with Custom Fields</h1>
+      </Row>
+      <Row>
+      <Col md="2">
+
+      </Col>
+
+      <Col md="8">
+      <Form onSubmit={onSubmit} >
+        <Form.Group controlId="first_name_last_name">
+          <Form.Row>
+            <Col>
+              <Form.Control 
+                name={"firstName"}
+                value={state.firstName}
+                onChange={handleChange}
+                placeholder="First name" 
+              />
+            </Col>
+            <Col>
+              <Form.Control 
+                name={"lastName"}
+                value={state.lastName}
+                onChange={handleChange}
+                placeholder="Last name" 
+              />
+            </Col>
+          </Form.Row>
+          </Form.Group>
+
+          <Form.Group controlId="formBasicEmail">
+            <Form.Control 
+              name={"email"}
+              value={state.email}
+              onChange={handleChange}
+              type="email" 
+              placeholder="Enter email" 
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Control 
+              name={"password"}
+              value={state.password}
+              onChange={handleChange}
+              placeholder="Enter Password"
+              type="password"  
+            />
+          </Form.Group>
+
+          <CustomForm state={state} modelFormItems={modelFormItems} helperHandleCustomFieldChange={helperHandleCustomFieldChange} />
+
+          <Button variant="primary" type="submit" >
+            Submit
+          </Button>
+      </Form>
+      </Col>
+
+      <Col md="2">
+
+      </Col>
+    </Row>
+  </Container>
+
+  
+  )
 }
 
 export default App
@@ -13,7 +110,8 @@ const values = {
   8:"Select Field",
   10:"He is jobless, rely on EDD",
   11:"35",
-  12:"So nice farm with a lot of sheep"
+  12:"So nice farm with a lot of sheep",
+  9:"This is Header"
 }
 
 
