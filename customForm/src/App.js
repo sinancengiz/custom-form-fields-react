@@ -109,7 +109,7 @@ export default App
 const values = {
   7:["red","blue"],
   15:["yellow","red"],
-  8:"Select Field",
+  8:"crv",
   10:"He is jobless, rely on EDD",
   11:"35",
   12:"So nice farm with a lot of sheep",
