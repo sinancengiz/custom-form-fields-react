@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "bootstrap-select": "^1.13.18",
     "custom-form-fields-react": "file:..",
+    "multiselect-react-dropdown": "^1.6.11",
     "react": "file:../node_modules/react",
     "react-bootstrap": "^1.5.2",
+    "react-bootstrap-multiselect": "^2.4.1",
     "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "file:../node_modules/react-scripts"
   },

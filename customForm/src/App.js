@@ -107,11 +107,15 @@ const App = () => {
 export default App
 
 const values = {
+  7:["red","blue"],
+  15:["yellow","red"],
   8:"Select Field",
   10:"He is jobless, rely on EDD",
   11:"35",
   12:"So nice farm with a lot of sheep",
-  9:"This is Header"
+  9:"This is Header",
+  13:"new field",
+  14:"another new field" 
 }
 
 
@@ -124,6 +128,16 @@ var modelFormItems = [{
     encrypt: true, 
     active: true, 
     options: ["red", "blue", "green"], 
+    required: false
+  },{
+    id: 15, 
+    model_form_id: 22, 
+    position: 1, 
+    type: "FormItem::Multiselect", 
+    label: "color second", 
+    encrypt: true, 
+    active: true, 
+    options: ["red", "yellow", "green"], 
     required: false
   },{
     id: 8, 
@@ -171,6 +185,26 @@ var modelFormItems = [{
     position: 1, 
     type: "FormItem::Text", 
     label: "Description", 
+    encrypt: false, 
+    active: true, 
+    options: null, 
+    required: false
+  },{
+    id: 13, 
+    model_form_id: 22, 
+    position: 1, 
+    type: "FormItem::Text", 
+    label: "new field", 
+    encrypt: false, 
+    active: true, 
+    options: null, 
+    required: false
+  },{
+    id: 14, 
+    model_form_id: 22, 
+    position: 1, 
+    type: "FormItem::Text", 
+    label: "extra field", 
     encrypt: false, 
     active: true, 
     options: null, 
