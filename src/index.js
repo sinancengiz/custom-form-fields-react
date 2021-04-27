@@ -1,76 +1,134 @@
-import React from 'react'
-import styles from './styles.module.css'
-import { Button, Form,  } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react'
+import { Form,  } from 'react-bootstrap';
+import MultiSelect from './Components/MultiSelect';
 
+export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChange }) => {
 
-export const CustomForm = ({ formLabel, values }) => {
+  const [customValues, setCustomValues] = useState(state.customValues);
+  
+  function onOptionsChange(selectedOptions, multiSelectId) {
+    let customFieldId = multiSelectId
+    setCustomValues( {       
+      ...customValues,
+      [customFieldId]: selectedOptions })
+  };
 
-  let formItems = values.map(value => {
-    switch(value.type) {
-      case "multiselect":
-        return(<Form.Group controlId={value.key}>
-                <Form.Label>{value.label}</Form.Label>
-                <Form.Control type={value.type} placeholder={value.placeholder} required={value.required}/>
+  function handleCustomFieldChange(evt) {
+    const value = evt.target.value;
+    setCustomValues({
+      ...customValues,
+      [evt.target.name]: value
+    });  
+  }
+
+  useEffect(() => {
+    // action on update of movies
+    helperHandleCustomFieldChange(customValues);
+}, [customValues]);
+
+  let formItems = modelFormItems.map(item => {
+    switch(item.type) {
+      case "FormItem::Multiselect":
+          return( <MultiSelect
+            name={item.id}
+            item={item}
+            selectedOptions={customValues[item.id]}
+            onOptionsChange={onOptionsChange}
+          />);
+        break;
+      case "FormItem::Text":
+        return(<Form.Group controlId={item.id}>
+                <Form.Label>{item.label}</Form.Label>
+                <Form.Control 
+                  as={"textarea"} rows={3}
+                  placeholder={`Enter ${item.label}`} 
+                  required={item.required}
+                  onChange={handleCustomFieldChange}
+                  name={item.id}
+                  value={customValues[item.id]? customValues[item.id] : ""}
+                />
               </Form.Group>
         );
         break;
-      case "text":
-        return(<Form.Group controlId={value.key}>
-                <Form.Label>{value.label}</Form.Label>
-                <Form.Control type={value.type} placeholder={value.placeholder} required={value.required}/>
+      case "FormItem::Line":
+        return(<Form.Group controlId={item.id}>
+                <Form.Label>{item.label}</Form.Label>
+                <Form.Control 
+                  type={"text"} 
+                  placeholder={`Enter ${item.label}`} 
+                  required={item.required}
+                  onChange={handleCustomFieldChange}
+                  name={item.id}
+                  value={customValues[item.id]? customValues[item.id] : ""}
+                />
               </Form.Group>
         );
         break;
-      case "number":
-        return(<Form.Group controlId={value.key}>
-                <Form.Label>{value.label}</Form.Label>
-                <Form.Control type={value.type} placeholder={value.placeholder} required={value.required}/>
+      case "FormItem::Number":
+        return(<Form.Group controlId={item.key}>
+                <Form.Label>{item.label}</Form.Label>
+                <Form.Control 
+                  type={"number"} 
+                  placeholder={`Enter ${item.label}`} 
+                  required={item.required}
+                  onChange={handleCustomFieldChange}
+                  name={item.id}
+                  value={customValues[item.id]? customValues[item.id] : ""}
+                />
               </Form.Group>
         );
         break;
-      case "Heading":
-        return(<Form.Group controlId={value.key}>
-                <Form.Label>{value.label}</Form.Label>
-                <Form.Control type={value.type} placeholder={value.placeholder} required={value.required}/>
+      case "FormItem::Date":
+        return(<Form.Group controlId={item.key}>
+                <Form.Label>{item.label}</Form.Label>
+                <Form.Control 
+                  type={"date"} 
+                  placeholder={`Enter ${item.label}`} 
+                  required={item.required}
+                  onChange={handleCustomFieldChange}
+                  name={item.id}
+                  value={customValues[item.id]? customValues[item.id] : ""}
+                />
               </Form.Group>
         );
         break;
-      case "select":
-        return(<Form.Group controlId={value.key}>
-                <Form.Label>{value.label}</Form.Label>
-                <Form.Control type={value.type} placeholder={value.placeholder} required={value.required}/>
+      case "FormItem::Heading":
+        return(<Form.Group controlId={item.key}>
+                <Form.Label>{ customValues[item.id] ? customValues[item.id]: null}</Form.Label>
               </Form.Group>
         );
         break;
-      case "range":
-        return(<Form.Group controlId={value.key}>
-                <Form.Label>{value.label}</Form.Label>
-                <Form.Control type={value.type} placeholder={value.placeholder} required={value.required}/>
-              </Form.Group>
+      case "FormItem::Select":
+        return( <Form.Group controlId={item.key}>
+                  <Form.Label>{item.label}</Form.Label>
+                  <Form.Control 
+                    as={"select"} custom
+                    onChange={handleCustomFieldChange}
+                    name={item.id}
+                    value={customValues[item.id]? customValues[item.id] : ""}
+                    >
+                    {item.options.map(option => <option value={option} >{option}</option>)}
+                  </Form.Control>
+                </Form.Group>
         );
         break;
       default:
-        return(<Form.Group controlId={value.key}>
-                <Form.Label>{value.label}</Form.Label>
-                <Form.Control type={value.type} placeholder={value.placeholder} required={value.required}/>
+        return(<Form.Group controlId={item.key}>
+                <Form.Label>{item.label}</Form.Label>
+                <Form.Control 
+                  type={"text"} 
+                  placeholder={`Enter ${item.label}`} 
+                  required={item.required}
+                  onChange={handleCustomFieldChange}
+                  name={item.id}
+                  value={customValues[item.id] || ""}
+                />
               </Form.Group>
         );
     }
   }
   )
-
-  return(
-    <div style={{width:500, margin:"auto", marginTop:100, padding:50, backgroundColor:"lightblue"}}>
-      <Form>
-        <h2>{formLabel}</h2>
-        {formItems}
-        <div style={{textAlign:"center"}}>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </div>
-      </Form>
-    </div>
-
+  return( 
+    <div>{formItems}</div>
   );
 }
