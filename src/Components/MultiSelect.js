@@ -17,7 +17,7 @@ class MultiSelect extends React.Component {
               selectedOptions: prevState.selectedOptions,
             }
           },
-          () => this.props.onOptionsChange(this.state.selectedOptions, this.props.item.id)
+          () => this.props.onOptionsChange(this.state.selectedOptions, this.props.item.key)
         )
       } else {
         this.setState(
@@ -30,7 +30,7 @@ class MultiSelect extends React.Component {
               selectedOptions: prevState.selectedOptions,
             }
           },
-          () => this.props.onOptionsChange(this.state.selectedOptions, this.props.item.id)
+          () => this.props.onOptionsChange(this.state.selectedOptions, this.props.item.key)
         )
       }
     }
@@ -39,8 +39,8 @@ class MultiSelect extends React.Component {
       return (
         <fieldset>
           <label>{this.props.item.label}</label>
-          {this.props.item.options.map((option, index) => (
-            <Option option={option} onOptionChange={this.onOptionsChange} selectedOptions={this.state.selectedOptions} />
+          {this.props.item.values.map((option, index) => (
+            <Option key={index} option={option.value} onOptionChange={this.onOptionsChange} selectedOptions={this.state.selectedOptions} />
           ))}
         </fieldset>
       )

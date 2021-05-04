@@ -16,6 +16,7 @@
     "react": "file:../node_modules/react",
     "react-bootstrap": "^1.5.2",
     "react-bootstrap-multiselect": "^2.4.1",
+    "react-datepicker": "^3.8.0",
     "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "file:../node_modules/react-scripts"
   },

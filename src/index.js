@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { Form,  } from 'react-bootstrap';
 import MultiSelect from './Components/MultiSelect';
+import DatePicker from "react-datepicker";
 
 export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChange }) => {
 
   const [customValues, setCustomValues] = useState(state.customValues);
-  
+
   function onOptionsChange(selectedOptions, multiSelectId) {
     let customFieldId = multiSelectId
+    let multiSelectField = "["
+    selectedOptions.forEach(element =>{
+      multiSelectField += `\"${element}\",`
+    })
+    if(multiSelectField.length > 3){
+      multiSelectField = multiSelectField.substring(0, multiSelectField.length - 1)
+    }    
+    multiSelectField += "]"
     setCustomValues( {       
       ...customValues,
-      [customFieldId]: selectedOptions })
+      [customFieldId]: multiSelectField })
   };
 
   function handleCustomFieldChange(evt) {
@@ -22,49 +31,49 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
   }
 
   useEffect(() => {
-    // action on update of movies
+    // action on update of customValues
     helperHandleCustomFieldChange(customValues);
 }, [customValues]);
 
   let formItems = modelFormItems.map(item => {
     switch(item.type) {
-      case "FormItem::Multiselect":
+      case "checkbox-group":
           return( <MultiSelect
-            name={item.id}
+            name={item.key}
             item={item}
-            selectedOptions={customValues[item.id]}
+            selectedOptions={ customValues[item.key]? typeof customValues[item.key] === 'string' ? JSON.parse(customValues[item.key]): customValues[item.key] :[]}
             onOptionsChange={onOptionsChange}
           />);
         break;
-      case "FormItem::Text":
-        return(<Form.Group controlId={item.id}>
+      case "textarea":
+        return(<Form.Group controlId={item.key}>
                 <Form.Label>{item.label}</Form.Label>
                 <Form.Control 
                   as={"textarea"} rows={3}
                   placeholder={`Enter ${item.label}`} 
                   required={item.required}
                   onChange={handleCustomFieldChange}
-                  name={item.id}
-                  value={customValues[item.id]? customValues[item.id] : ""}
+                  name={item.key}
+                  value={customValues[item.key]? customValues[item.key] : ""}
                 />
               </Form.Group>
         );
         break;
-      case "FormItem::Line":
-        return(<Form.Group controlId={item.id}>
+      case "text":
+        return(<Form.Group controlId={item.key}>
                 <Form.Label>{item.label}</Form.Label>
                 <Form.Control 
                   type={"text"} 
                   placeholder={`Enter ${item.label}`} 
                   required={item.required}
                   onChange={handleCustomFieldChange}
-                  name={item.id}
-                  value={customValues[item.id]? customValues[item.id] : ""}
+                  name={item.key}
+                  value={customValues[item.key]? customValues[item.key] : ""}
                 />
               </Form.Group>
         );
         break;
-      case "FormItem::Number":
+      case "number":
         return(<Form.Group controlId={item.key}>
                 <Form.Label>{item.label}</Form.Label>
                 <Form.Control 
@@ -72,42 +81,35 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
                   placeholder={`Enter ${item.label}`} 
                   required={item.required}
                   onChange={handleCustomFieldChange}
-                  name={item.id}
-                  value={customValues[item.id]? customValues[item.id] : ""}
+                  name={item.key}
+                  value={customValues[item.key]? customValues[item.key] : ""}
                 />
               </Form.Group>
         );
         break;
-      case "FormItem::Date":
+      case "date":
         return(<Form.Group controlId={item.key}>
                 <Form.Label>{item.label}</Form.Label>
-                <Form.Control 
-                  type={"date"} 
-                  placeholder={`Enter ${item.label}`} 
-                  required={item.required}
-                  onChange={handleCustomFieldChange}
-                  name={item.id}
-                  value={customValues[item.id]? customValues[item.id] : ""}
-                />
+                <DatePicker selected={typeof customValues[item.key] === 'string'? new Date(customValues[item.key]) : customValues[item.key]} onChange={selectedDate => setCustomValues({...customValues, [item.key]:selectedDate.toLocaleDateString()})}/>
               </Form.Group>
         );
         break;
-      case "FormItem::Heading":
+      case "header":
         return(<Form.Group controlId={item.key}>
-                <Form.Label>{ customValues[item.id] ? customValues[item.id]: null}</Form.Label>
+                <Form.Label>{ customValues[item.key] ? customValues[item.key]: null}</Form.Label>
               </Form.Group>
         );
         break;
-      case "FormItem::Select":
+      case "select":
         return( <Form.Group controlId={item.key}>
                   <Form.Label>{item.label}</Form.Label>
                   <Form.Control 
                     as={"select"} custom
                     onChange={handleCustomFieldChange}
-                    name={item.id}
-                    value={customValues[item.id]? customValues[item.id] : ""}
+                    name={item.key}
+                    value={customValues[item.key]? customValues[item.key] : ""}
                     >
-                    {item.options.map(option => <option value={option} >{option}</option>)}
+                    {item.values.map(item => <option value={item.value} >{item.value}</option>)}
                   </Form.Control>
                 </Form.Group>
         );
@@ -120,8 +122,8 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
                   placeholder={`Enter ${item.label}`} 
                   required={item.required}
                   onChange={handleCustomFieldChange}
-                  name={item.id}
-                  value={customValues[item.id] || ""}
+                  name={item.key}
+                  value={customValues[item.key] || ""}
                 />
               </Form.Group>
         );

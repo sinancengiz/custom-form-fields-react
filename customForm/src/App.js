@@ -106,19 +106,103 @@ const App = () => {
 
 export default App
 
+// const values = {
+//   7:["red","blue"],
+//   15:["yellow","red"],
+//   8:"crv",
+//   10:"He is jobless, rely on EDD",
+//   11:"35",
+//   12:"So nice farm with a lot of sheep",
+//   9:"This is Header",
+//   13:"new field",
+//   14:"another new field" 
+// }
+
+// var modelFormItems = [
+//   {
+//     "key": 1,
+//     "type": "checkbox-group",
+//     "label": "fare",
+//     "values": [
+//       {
+//         "value": "First Class",
+//         "selected": false,
+//         "label": "First class"
+//       },
+//       {
+//         "value": "Business",
+//         "selected": false,
+//         "label": "Business"
+//       },
+//       {
+//         "value": "Economy",
+//         "selected": false,
+//         "label": "Economy"
+//       }
+//     ],
+//     "required": false
+//   },
+//   {
+//     "key": 2,
+//     "type": "select",
+//     "label": "toyota",
+//     "values": [
+//       {
+//         "value": null,
+//         "selected": false
+//       },
+//       {
+//         "value": null,
+//         "selected": false
+//       },
+//       {
+//         "value": null,
+//         "selected": false
+//       }
+//     ],
+//     "required": false
+//   },
+//   {
+//     "key": 3,
+//     "type": "header",
+//     "label": "title",
+//     "subtype": "h3",
+//     "value": null
+//   },
+//   {
+//     "key": 4,
+//     "type": "text",
+//     "label": "address",
+//     "subtype": "text",
+//     "value": null,
+//     "required": false
+//   },
+//   {
+//     "key": 5,
+//     "type": "number",
+//     "label": "year",
+//     "value": null
+//   },
+//   {
+//     "key": 6,
+//     "type": "textarea",
+//     "label": "description",
+//     "value": null,
+//     "required": false
+//   }
+// ]
 const values = {
-  7:["red","blue"],
-  15:["yellow","red"],
-  8:"crv",
-  10:"He is jobless, rely on EDD",
-  11:"35",
-  12:"So nice farm with a lot of sheep",
-  9:"This is Header",
-  13:"new field",
-  14:"another new field" 
+  "1": "[\"Economy\",\"Business\"]",
+  "2": "Corolla",
+  "4": "san francisco Ca",
+  "5": "2021",
+  "6": "description edited",
+  "13": "5/12/2021",
+  "15": "[\"blue\",\"yellow\"]",
+  "16": "5/19/2021"
 }
 
-var modelFormItems = [
+var modelFormItems =[
   {
     "key": 1,
     "type": "checkbox-group",
@@ -148,15 +232,15 @@ var modelFormItems = [
     "label": "toyota",
     "values": [
       {
-        "value": null,
+        "value": "Camry",
         "selected": false
       },
       {
-        "value": null,
+        "value": "Corolla",
         "selected": false
       },
       {
-        "value": null,
+        "value": "Tacoma",
         "selected": false
       }
     ],
@@ -165,7 +249,7 @@ var modelFormItems = [
   {
     "key": 3,
     "type": "header",
-    "label": "title",
+    "label": "Custom Fields",
     "subtype": "h3",
     "value": null
   },
@@ -189,8 +273,44 @@ var modelFormItems = [
     "label": "description",
     "value": null,
     "required": false
+  },
+  {
+    "key": 13,
+    "type": "date",
+    "label": "Date Field",
+    "value": null
+  },
+  {
+    "key": 15,
+    "type": "checkbox-group",
+    "label": "colors",
+    "values": [
+      {
+        "value": "red",
+        "selected": false,
+        "label": "Red"
+      },
+      {
+        "value": "blue",
+        "selected": false,
+        "label": "Blue"
+      },
+      {
+        "value": "yellow",
+        "selected": false,
+        "label": "Yellow"
+      }
+    ],
+    "required": false
+  },
+  {
+    "key": 16,
+    "type": "date",
+    "label": "Date 2",
+    "value": null
   }
 ]
+
 // var modelFormItems = [{
 //     id: 7, 
 //     model_form_id: 22, 
