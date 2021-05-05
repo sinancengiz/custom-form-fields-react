@@ -1,6 +1,6 @@
 import React, { useState }  from 'react'
 import { Container, Form, Button,Col,Row} from 'react-bootstrap';
-import { CustomForm } from 'custom-form-fields-react'
+import { CustomForm, DisplayCustomFields } from 'custom-form-fields-react'
 import 'custom-form-fields-react/dist/index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -85,7 +85,7 @@ const App = () => {
               type="password"  
             />
           </Form.Group>
-
+          <DisplayCustomFields state={state} modelFormItems={modelFormItems}></DisplayCustomFields>
           <CustomForm state={state} modelFormItems={modelFormItems} helperHandleCustomFieldChange={helperHandleCustomFieldChange} />
 
           <Button variant="primary" type="submit" >
