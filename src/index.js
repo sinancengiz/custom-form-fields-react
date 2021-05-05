@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form,  } from 'react-bootstrap';
+import { Form, Row, Col, Container  } from 'react-bootstrap';
 import MultiSelect from './Components/MultiSelect';
 import DatePicker from "react-datepicker";
 
@@ -47,7 +47,7 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
         break;
       case "textarea":
         return(<Form.Group controlId={item.key}>
-                <Form.Label>{item.label}</Form.Label>
+                <Form.Label>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</Form.Label>
                 <Form.Control 
                   as={"textarea"} rows={3}
                   placeholder={`Enter ${item.label}`} 
@@ -61,7 +61,7 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
         break;
       case "text":
         return(<Form.Group controlId={item.key}>
-                <Form.Label>{item.label}</Form.Label>
+                <Form.Label>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</Form.Label>
                 <Form.Control 
                   type={"text"} 
                   placeholder={`Enter ${item.label}`} 
@@ -75,7 +75,7 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
         break;
       case "number":
         return(<Form.Group controlId={item.key}>
-                <Form.Label>{item.label}</Form.Label>
+                <Form.Label>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</Form.Label>
                 <Form.Control 
                   type={"number"} 
                   placeholder={`Enter ${item.label}`} 
@@ -89,20 +89,20 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
         break;
       case "date":
         return(<Form.Group controlId={item.key}>
-                <Form.Label>{item.label}</Form.Label>
+                <Form.Label>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</Form.Label>
                 <DatePicker selected={typeof customValues[item.key] === 'string'? new Date(customValues[item.key]) : customValues[item.key]} onChange={selectedDate => setCustomValues({...customValues, [item.key]:selectedDate.toLocaleDateString()})}/>
               </Form.Group>
         );
         break;
       case "header":
         return(<Form.Group controlId={item.key}>
-                <Form.Label>{ customValues[item.key] ? customValues[item.key]: null}</Form.Label>
+                <Form.Label>{ customValues[item.key] ? customValues[item.key].trim().replace(/^\w/, (c) => c.toUpperCase()): null}</Form.Label>
               </Form.Group>
         );
         break;
       case "select":
         return( <Form.Group controlId={item.key}>
-                  <Form.Label>{item.label}</Form.Label>
+                  <Form.Label>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</Form.Label>
                   <Form.Control 
                     as={"select"} custom
                     onChange={handleCustomFieldChange}
@@ -116,7 +116,7 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
         break;
       default:
         return(<Form.Group controlId={item.key}>
-                <Form.Label>{item.label}</Form.Label>
+                <Form.Label>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</Form.Label>
                 <Form.Control 
                   type={"text"} 
                   placeholder={`Enter ${item.label}`} 
@@ -132,5 +132,76 @@ export const CustomForm = ({ state, modelFormItems, helperHandleCustomFieldChang
   )
   return( 
     <div>{formItems}</div>
+  );
+}
+
+
+export const DisplayCustomFields = ({state, modelFormItems}) => {
+
+  const [customValues, setCustomValues] = useState(state.customValues);
+
+  let formItems = modelFormItems.map(item => {
+    switch(item.type) {
+      case "checkbox-group":
+          return(<tr>
+                  <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                  <td scope="col">{customValues[item.key]? typeof customValues[item.key] === 'string' ? JSON.parse(customValues[item.key]).join(", "): customValues[item.key] :[]}</td>
+                </tr>);
+        break;
+      case "textarea":
+        return(<tr>
+                <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                <td>{customValues[item.key]? customValues[item.key] : ""}</td>
+              </tr>
+        );
+        break;
+      case "text":
+        return(<tr>
+                <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                <td>{customValues[item.key]? customValues[item.key] : ""}</td>
+              </tr>
+        );
+        break;
+      case "number":
+        return(<tr>
+                <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                <td>{customValues[item.key]? customValues[item.key] : ""}</td>
+              </tr>
+        );
+        break;
+      case "date":
+        return(<tr>
+                <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                <td>{customValues[item.key]? customValues[item.key] : ""}</td>
+              </tr>
+        );
+        break;
+      case "header":
+        return(<tr>
+                <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                <th scope="col"></th>
+              </tr>
+        );
+        break;
+      case "select":
+        return(<tr>
+                <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                  <td>{item.values.map(item => item.value + ", ")}</td>
+              </tr>
+        );
+        break;
+      default:
+        return(<tr>
+                <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                <th scope="col"></th>
+              </tr>
+        );
+    }
+  }
+  )
+  return( 
+    <table class="table table-sm">
+      {formItems}
+    </table>
   );
 }

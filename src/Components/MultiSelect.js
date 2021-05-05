@@ -38,7 +38,7 @@ class MultiSelect extends React.Component {
     render() {
       return (
         <fieldset>
-          <label>{this.props.item.label}</label>
+          <label>{this.props.item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</label>
           {this.props.item.values.map((option, index) => (
             <Option key={index} option={option.value} onOptionChange={this.onOptionsChange} selectedOptions={this.state.selectedOptions} />
           ))}
