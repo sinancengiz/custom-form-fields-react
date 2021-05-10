@@ -178,7 +178,7 @@ export const DisplayCustomFields = ({state, modelFormItems}) => {
         break;
       case "header":
         return(<tr>
-                <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
+                <th scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
                 <th scope="col"></th>
               </tr>
         );
@@ -186,7 +186,7 @@ export const DisplayCustomFields = ({state, modelFormItems}) => {
       case "select":
         return(<tr>
                 <th class="table-heading"scope="col"><b>{item.label.trim().replace(/^\w/, (c) => c.toUpperCase())}</b></th>
-                  <td>{item.values.map(item => item.value + ", ")}</td>
+                  <td>{customValues[item.key]? customValues[item.key] : ""}</td>
               </tr>
         );
         break;
