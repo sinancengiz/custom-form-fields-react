@@ -1,6 +1,6 @@
 # custom-form-fields-react
 
-> This is a library helps user to create custom forms. All you need to do is passing the list of objects contain form fileds information to the CustomForm component and it will return a React Form.
+> This is a library helps user to create custom forms. All you need to do is passing the list of objects contain form fields information to the CustomForm component and it will return a React Form. Similar to Custo form user can pass form item values to DisplayCustomFields to display them in a table.
 
 [![NPM](https://img.shields.io/npm/v/custom-form-fields-react.svg)](https://www.npmjs.com/package/custom-form-fields-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -8,6 +8,10 @@
 
 ```bash
 npm install --save custom-form-fields-react
+
+or 
+
+yarn add custom-form-fields-react
 ```
 
 ## Usage
