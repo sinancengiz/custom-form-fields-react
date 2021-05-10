@@ -124,6 +124,7 @@ const App = () => {
 
 export default App
 
+//example values to provide form items not provided items will be emty
 const values = {
   "1": "[\"Economy\",\"Business\"]",
   "2": "Corolla",
@@ -135,6 +136,7 @@ const values = {
   "16": "5/19/2021"
 }
 
+//this is the example form items checkbox, select, text, number, textarea, date, header 
 var modelFormItems =[
   {
     "key": 1,

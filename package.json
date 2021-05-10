@@ -1,7 +1,7 @@
 {
   "name": "custom-form-fields-react",
-  "version": "1.0.4",
-  "description": "this is ibrary helps user to create custom forms fields",
+  "version": "1.0.5",
+  "description": "this is library helps user to create custom forms fields adn display them in a table",
   "author": "sinancengiz",
   "license": "MIT",
   "repository": "sinancengiz/custom-form-fields-react",
